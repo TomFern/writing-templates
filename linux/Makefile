@@ -11,12 +11,13 @@ clean:
 	rm -rf build
 
 build/post.md: main.md
-	mkdir -p build/img
-	cp img/*. build/img/ || true
-	mogrify -background White -alpha Background -format jpg build/public/$(PROJECT)/*.png
-	rm build/img/*.png
-	m4 -E -I./ main.md > build/post.md
-	grep "] " build/post.md || true
+	mkdir -p build/img/
+	cp img/* build/img/ || true
+	mogrify -background White -alpha Background -format jpg build/img/*.png || true
+	rm build/img/*.png || true
+	m4 -E -I./inc main.md > build/includes.md
+	sed 's/.png/.jpg/g' < build/includes.md > build/post.md
+	rm build/includes.md
 
 build/post.txt: build/post.md
 	(cd build && pandoc -f gfm -t plain -o post.txt post.md)

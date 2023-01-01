@@ -10,15 +10,15 @@ docx: build/post.docx
 clean: 
 	rm -rf build
 
-build/post.md: main.md links.md
-	mkdir -p build/img/
-	sips -s format jpeg img/*.png --out build/img/ || true
-	cp img/*.jpg img/*.jpeg build/img || true
-	/Applications/ImageOptim.app/Contents/MacOS/ImageOptim build/img/*.jpg
-	m4 -E -I./ main.md > build/out.md
-	sed 's/img\//public\/$(PROJECT)\//g;s/.png/.jpg/g' < build/out.md > build/post.md
-	rm build/out.md
-	grep "] " build/post.md || true
+build/post.md: main.md
+	mkdir -p build/img/d
+	cp img/* build/img || true
+	sips -s format jpeg build/img/*.png --out build/img/ || true
+	rm build/img/*.png || true
+	/Applications/ImageOptim.app/Contents/MacOS/ImageOptim build/img/*.jpg || true
+	m4 -E -I./ main.md > build/includes.md
+	sed 's/.png/.jpg/g' < build/includes.md > build/post.md
+	rm build/includes.md
 
 build/post.txt: build/post.md
 	(cd build && pandoc -f gfm -t plain -o post.txt post.md)

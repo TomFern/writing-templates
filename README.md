@@ -1,16 +1,18 @@
-# Tomas Fernandez
+# Writing Templates
 
-![Me](https://raw.githubusercontent.com/TomFern/TomFern/master/media/victoria.jpg)
+Here are Markdown blog writing templates that add include support to Markdown. Makefiles are included to build the final document in multiple formats.
 
-👋 My name is Tomas Fernandez. I live in Argentina. Over my professional career, I’ve worn many hats: sysadmin, dba, and developer. I loved them all.
+## General usage
 
-A few years ago, I needed a change and began freelancing. One thing led to another, and I found a passion for technical writing. After a few years of freelancing, I was fortunate enough to be offered a position as a full-time writer at [Semaphore](https://semaphoreci.com).
+- **Images**: go in the img folder. Accepted formats are jpg and png. Add your image to your Markdown post as you normally would, e.g. `![](./img/cat.jpg)`
+- **Includes**: included files (code, snippets, etc) go in the inc folder. To add the contents of the file in your main Markdown document use `include({{example.js}})` (without `inc` in the path).
 
-You can find my personal blog at [tomfern.com](https://tomfern.com) and my professional writings at the [Semaphore blog](https://semaphoreci.com/author/tfernandez).
+Make targets:
+- `make post`: creates a Markdown file with the included files
+- `make txt`: creates a plain text document without images
+- `make docx`: creates a Word document.
 
-Find me also in:
+Check `README.md` on the appropiate folder for more info. Windows users should install WSL and use the Linux template.
 
-- [LinkedIn](https://www.linkedin.com/in/pablo-tomas-fernandez-zavalia-b6077514/)
-- [Twitter](https://twitter.com/tomfernblog)
+For a more detailed explanation check [this blog post]().
 
--Tomas
