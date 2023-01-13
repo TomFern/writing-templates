@@ -10,12 +10,13 @@ docx: build/post.docx
 clean: 
 	rm -rf build
 
-build/post.md: main.md
-	mkdir -p build/img/
-	cp img/* build/img/ || true
-	mogrify -background White -alpha Background -format jpg build/img/*.png || true
+build/post.md: post.md
+	mkdir -p build/img/d
+	cp img/* build/img || true
+	sips -s format jpeg build/img/*.png --out build/img/ || true
 	rm build/img/*.png || true
-	m4 -E -I./inc main.md > build/includes.md
+	/Applications/ImageOptim.app/Contents/MacOS/ImageOptim build/img/*.jpg || true
+	m4 -E -I./ post.md > build/includes.md
 	sed 's/.png/.jpg/g' < build/includes.md > build/post.md
 	rm build/includes.md
 
